@@ -14,8 +14,7 @@ body {
 
 .calc-wrapper {
     display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: minmax(100px, auto) repeat(5, 80px);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 5px;
     border-radius: 10px;
     overflow: hidden;
@@ -28,15 +27,29 @@ button {
     cursor:pointer;
     color:white;
     font-size:1.5rem;
-    border-radius: 10px;
+    border-radius: 5px;
+    padding:20px;
+}
+
+button:hover {
+    filter: brightness(0.8);
 }
 
 .display {
     grid-column: span 4;
     padding:20px;
-    font-size:2rem;
     color:white;
     text-align: right;
+}
+
+.display-last {
+    font-size:1.5rem;
+    min-height:2rem;
+}
+
+.display-current {
+    font-size:2rem;
+    min-height:2rem;
 }
 
 .col-span-2 {

@@ -1,32 +1,52 @@
 const numberButtons = document.querySelectorAll(".number-btn");
-const display = document.querySelector(".display");
+const displayCurrent = document.querySelector(".display-current");
+const displayLast = document.querySelector(".display-last");
 const clearButton = document.querySelector(".clear-btn");
+const operatorButtons = document.querySelectorAll(".operator-btn");
+const number = [];
 
 let result = 0;
+let placeholder = 0;
+let operator;
 
-clearButton.addEventListener("click", () => {
-    result = 0;
-    display.textContent = result;
-});
+
+clearButton.addEventListener("click", clear);
 
 numberButtons.forEach(button => {
     button.addEventListener("click", () => {
-        display.textContent += button.textContent; 
+        if (result === 0) {
+            result = result.toString().slice(1);
+        }    
+        result += button.textContent;
+        displayCurrent.textContent = result;
     });
 });
 
-function operater(operator, num1, num2) {
-    if (operator === "+") {
-        add(num1, num2);
-    }
-    if (operator === "-") {
-        subtract(num1, num2);
-    }
-    if (operator === "*") {
-        multiply(num1, num2);
-    }
-    if (operator === "/") {
-        divide(num1, num2);
+operatorButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        if (placeholder === 0) {
+            placeholder = result;
+            operator = button.textContent;
+            displayLast.textContent = placeholder + " " + operator;
+        } else {
+            result = operate(operator, placeholder, result);
+            displayCurrent.textContent = result;
+        }
+    });
+});
+
+function operate(operator, num1, num2) {
+    switch (operator) {
+        case "+":
+          return add(num1, num2);
+        case "-":
+          return subtract(num1, num2);
+        case "*":
+          return multiply(num1, num2);
+        case "/":
+          return divide(num1, num2);
+        default:
+          return "Invalid operator";
     }
 }
 
@@ -44,4 +64,12 @@ function multiply(num1, num2) {
 
 function divide(num1, num2) {
     return num1 / num2;
+}
+
+function clear() {
+    result = 0;
+    placeholder = 0;
+    placeholder = placeholder.toString().slice(1);
+    displayLast.textContent = placeholder;
+    displayCurrent.textContent = result;
 }
