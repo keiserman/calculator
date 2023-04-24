@@ -15,19 +15,19 @@ body {
 .calc-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 5px;
+    grid-gap: 1px;
     border-radius: 10px;
     overflow: hidden;
-    padding: 10px;
+    background-color: #212222;
+    border:1px solid #ffffff2e;
 }
 
 button {
     border:none;
-    background-color:#333333;
+    background-color:#636464;
     cursor:pointer;
     color:white;
     font-size:1.5rem;
-    border-radius: 5px;
     padding:20px;
 }
 
@@ -40,11 +40,7 @@ button:hover {
     padding:20px;
     color:white;
     text-align: right;
-}
-
-.display-last {
-    font-size:1.5rem;
-    min-height:2rem;
+    font-size:3rem;
 }
 
 .display-current {
@@ -56,11 +52,11 @@ button:hover {
     grid-column: span 2;
 }
 
-.clear-btn, .sign-btn, .percent-btn {
-    background-color: #a5a5a5;
-    color:#000000;
+.clear-btn, .delete-btn, .percent-btn {
+    background-color: #3F4040;
+    color:white;
 }
 
-.operator-btn {
-    background-color: #f1a33c;
+.operator-btn, .equals-btn {
+    background-color: #FF9F08;
 }
