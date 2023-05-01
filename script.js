@@ -6,6 +6,7 @@ const operatorButtons = document.querySelectorAll(".operator-btn");
 const deleteButton = document.querySelector(".delete-btn");
 const percentButton = document.querySelector(".percent-btn");
 const periodButton = document.querySelector(".period-btn");
+const allButtons = document.querySelectorAll("button");
 
 let current = "";
 let last = "";
@@ -21,11 +22,15 @@ deleteButton.addEventListener("click", backspace);
 clearButton.addEventListener("click", clear);
 percentButton.addEventListener("click", getPercent);
 periodButton.addEventListener("click", addPeriod);
+allButtons.forEach(button => button.addEventListener("click", button.blur));
+numberButtons.forEach(button => button.addEventListener("click", () => getNumber(button.textContent)));
+operatorButtons.forEach(button => button.addEventListener("click", () => getOperator(button.dataset.sign)));
 
 document.addEventListener("keydown", (event) => {
     console.log(event.key);
     (event.key === "Backspace") ? backspace() : null;
-    (event.key === ".") ? addPeriod() : null;
+    (event.key === "Escape" || event.key === "c") ? clear() : null;
+    (event.key === "%") ? getPercent() : null;
     (event.key >= 0 && event.key <= 9) ? getNumber(event.key) : null;
     if (event.key === "*" || event.key === "+" || event.key === "/" || event.key === "-") {getOperator(event.key)}
     if (event.key === "Enter") {
@@ -43,14 +48,6 @@ equalsButton.addEventListener("click", () => {
     } else {
         return;
     }
-});
-
-numberButtons.forEach(button => {
-    button.addEventListener("click", () => getNumber(button.textContent));
-});
-
-operatorButtons.forEach(button => {
-    button.addEventListener("click", () => getOperator(button.dataset.sign));
 });
 
 function operate(operator, a, b) {
