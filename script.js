@@ -22,32 +22,28 @@ deleteButton.addEventListener("click", backspace);
 clearButton.addEventListener("click", clear);
 percentButton.addEventListener("click", getPercent);
 periodButton.addEventListener("click", addPeriod);
+
 allButtons.forEach(button => button.addEventListener("click", button.blur));
 numberButtons.forEach(button => button.addEventListener("click", () => getNumber(button.textContent)));
 operatorButtons.forEach(button => button.addEventListener("click", () => getOperator(button.dataset.sign)));
 
 document.addEventListener("keydown", (event) => {
-    console.log(event.key);
     (event.key === "Backspace") ? backspace() : null;
     (event.key === "Escape" || event.key === "c") ? clear() : null;
     (event.key === "%") ? getPercent() : null;
     (event.key >= 0 && event.key <= 9) ? getNumber(event.key) : null;
-    if (event.key === "*" || event.key === "+" || event.key === "/" || event.key === "-") {getOperator(event.key)}
+    if (event.key === "*" || event.key === "+" || event.key === "/" || event.key === "-") {
+        getOperator(event.key);
+    }
     if (event.key === "Enter") {
-        if(operator) {
-            updateDisplay(operate(operator, last, current));
-        } else {
-            return;
-        }
+        if (operator) updateDisplay(operate(operator, last, current))
+        else return
     }
 });
 
 equalsButton.addEventListener("click", () => {
-    if(operator) {
-        updateDisplay(operate(operator, last, current));
-    } else {
-        return;
-    }
+    if (operator) updateDisplay(operate(operator, last, current))
+    else return
 });
 
 function operate(operator, a, b) {
@@ -73,7 +69,6 @@ function operate(operator, a, b) {
 }
 
 function getNumber(num) {
-    display.textContent == "0" ? updateDisplay("") : null;
     current += num;
     updateDisplay(current);
 }
@@ -94,10 +89,11 @@ function getOperator(op) {
 function backspace() {
     if (current.length > 1) {
         current = current.slice(0, -1);
+        updateDisplay(current);
     } else {
-        current = "0";
+        current = "";
+        updateDisplay(0);
     }
-    updateDisplay(current);
 }
 
 function clear() {
