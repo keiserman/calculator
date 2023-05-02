@@ -57,12 +57,8 @@ function operate(operator, a, b) {
         case "*":
           return multiply(a, b);
         case "/":
-            if (b === 0) {
-                alert("Division by zero!");
-                return null;
-            } else {
-                return divide(a, b);
-            }
+            if (b === 0) return NaN;
+            else return divide(a, b);
         default:
           return null;
     }
